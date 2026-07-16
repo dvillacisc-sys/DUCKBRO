@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Hanken Grotesk',system-ui,sans-serif;color:#0d1621;background:#ffffff;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:var(--accent,#1c3a5e);text-decoration:none}
+  a:hover{color:color-mix(in srgb,var(--accent,#1c3a5e) 78%,#000)}
+  ::selection{background:color-mix(in srgb,var(--accent,#1c3a5e) 22%,#fff);color:#0d1621}
+  input,select,button,textarea{font-family:inherit}
+  @keyframes rvl{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  @keyframes heroIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-26px) scale(1.1)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-34px,22px) scale(1.07)}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  @keyframes pulseRing{0%{box-shadow:0 4px 14px rgba(13,22,33,.3),0 0 0 0 color-mix(in srgb,var(--accent,#1c3a5e) 40%,transparent)}70%{box-shadow:0 4px 14px rgba(13,22,33,.3),0 0 0 12px transparent}100%{box-shadow:0 4px 14px rgba(13,22,33,.3),0 0 0 0 transparent}}
+  @keyframes iconPop{from{opacity:0;transform:scale(.6) rotate(-8deg)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+  @media (max-width:860px){
+    [data-nav-links]{display:none!important}
+    [data-hero]{grid-template-columns:1fr!important}
+    [data-2col]{grid-template-columns:1fr!important}
+    [data-tiers]{grid-template-columns:1fr!important;gap:16px!important}
+    [data-calc]{grid-template-columns:1fr!important}
+    [data-grid3]{grid-template-columns:1fr!important}
+    [data-grid5]{grid-template-columns:1fr!important}
+    [data-process]{grid-auto-flow:row!important;grid-template-columns:1fr!important}
+    [data-pad]{padding-left:22px!important;padding-right:22px!important}
+    [data-h1]{font-size:44px!important}
+    [data-hide-sm]{display:none!important}
+    [data-tierrow]{grid-template-columns:1fr!important}
+  }
+</style>
+</helmet>
+
+<div id="top" style="--accent: {{ accent }}; overflow-x:hidden">
+
+<!-- ============ NAV ============ -->
+<header style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.85);backdrop-filter:blur(14px);border-bottom:1px solid #e3e8ed">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="#top" style="display:flex;align-items:center;gap:11px">
+      <span style="width:28px;height:28px;border:2px solid var(--accent,#1c3a5e);border-radius:7px;display:inline-flex;align-items:center;justify-content:center;color:var(--accent,#1c3a5e);font-weight:800;font-size:15px;letter-spacing:-.03em">D</span>
+      <span style="font-weight:700;font-size:19px;letter-spacing:-.03em;color:#0d1621">DeckHaus</span>
+    </a>
+    <nav data-nav-links style="display:flex;align-items:center;gap:30px">
+      <a href="#products" style="color:#4a5763;font-size:14.5px;font-weight:500">Products</a>
+      <a href="#pricing" style="color:#4a5763;font-size:14.5px;font-weight:500">Pricing</a>
+      <a href="#process" style="color:#4a5763;font-size:14.5px;font-weight:500">Process</a>
+      <a href="#ai-studio" style="color:#4a5763;font-size:14.5px;font-weight:500">Work</a>
+      <a href="#faq" style="color:#4a5763;font-size:14.5px;font-weight:500">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:16px">
+      <div data-hide-sm style="display:flex;align-items:center;border:1px solid #e3e8ed;border-radius:8px;overflow:hidden;font-size:12px;font-weight:600">
+        <button onClick="{{ setEN }}" style="border:none;padding:6px 10px;cursor:pointer;background:{{ enBg }};color:{{ enFg }}">EN</button>
+        <button onClick="{{ setES }}" style="border:none;padding:6px 10px;cursor:pointer;background:{{ esBg }};color:{{ esFg }}">ES</button>
+      </div>
+      <button onClick="{{ goCalc }}" style="border:none;background:var(--accent,#1c3a5e);color:#fff;font-weight:600;font-size:14px;padding:10px 18px;border-radius:9px;cursor:pointer" style-hover="background:color-mix(in srgb,var(--accent,#1c3a5e) 82%,#000)">Get an instant quote</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section style="position:relative;overflow:hidden">
+  <!-- ambient background -->
+  <div style="position:absolute;top:-160px;right:-120px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent,#1c3a5e) 14%,transparent) 0%,transparent 65%);animation:drift 14s ease-in-out infinite;pointer-events:none"></div>
+  <div style="position:absolute;bottom:-200px;left:-140px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent,#1c3a5e) 9%,transparent) 0%,transparent 65%);animation:drift2 18s ease-in-out infinite;pointer-events:none"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(#e9eef3 1px,transparent 1px),linear-gradient(90deg,#e9eef3 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 90% 70% at 60% 30%,rgba(0,0,0,.5),transparent);pointer-events:none"></div>
+  <div data-pad style="position:relative;max-width:1220px;margin:0 auto;padding:96px 40px 84px">
+  <div data-hero style="display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:#4a5763;border:1px solid #dfe5ec;border-radius:20px;padding:6px 13px;margin-bottom:26px;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);animation:heroIn .7s cubic-bezier(.2,.7,.3,1) both">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--accent,#1c3a5e);animation:blink 2.2s ease-in-out infinite"></span>
+        PRESENTATION DESIGN, PRODUCTIZED
+      </div>
+      <h1 data-h1 style="font-size:62px;line-height:1.02;letter-spacing:-.038em;font-weight:800;margin:0 0 24px;color:#0d1621;animation:heroIn .7s cubic-bezier(.2,.7,.3,1) .08s both">Pitch decks that close.<br>Fixed price per slide.<br><span style="background:linear-gradient(100deg,var(--accent,#1c3a5e),color-mix(in srgb,var(--accent,#1c3a5e) 55%,#4d9fd6));-webkit-background-clip:text;background-clip:text;color:transparent">Fixed delivery date.</span></h1>
+      <p style="font-size:19px;line-height:1.55;color:#4a5763;max-width:490px;margin:0 0 34px;animation:heroIn .7s cubic-bezier(.2,.7,.3,1) .16s both">Designed by senior designers, accelerated by an in-house AI production pipeline. You configure the price before you order — and we hit the date, every time.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;animation:heroIn .7s cubic-bezier(.2,.7,.3,1) .24s both">
+        <button onClick="{{ goCalc }}" style="border:none;background:var(--accent,#1c3a5e);color:#fff;font-weight:600;font-size:16px;padding:15px 26px;border-radius:11px;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 12px 28px -12px color-mix(in srgb,var(--accent,#1c3a5e) 60%,transparent)" style-hover="background:color-mix(in srgb,var(--accent,#1c3a5e) 82%,#000);transform:translateY(-2px);box-shadow:0 18px 34px -12px color-mix(in srgb,var(--accent,#1c3a5e) 70%,transparent)">Get an instant quote →</button>
+        <button onClick="{{ goWork }}" style="border:1px solid #d4dbe2;background:rgba(255,255,255,.8);backdrop-filter:blur(6px);color:#0d1621;font-weight:600;font-size:16px;padding:15px 26px;border-radius:11px;cursor:pointer;transition:transform .2s,border-color .2s,color .2s" style-hover="border-color:var(--accent,#1c3a5e);color:var(--accent,#1c3a5e);transform:translateY(-2px)">See our AI production</button>
+      </div>
+      <div style="display:flex;gap:30px;margin-top:44px;animation:heroIn .7s cubic-bezier(.2,.7,.3,1) .32s both">
+        <div><div style="font-size:26px;font-weight:800;letter-spacing:-.02em">48–72h</div><div style="font-size:13px;color:#7b8794;margin-top:2px">rush turnaround available</div></div>
+        <div style="width:1px;background:#e3e8ed"></div>
+        <div><div style="font-size:26px;font-weight:800;letter-spacing:-.02em">100%</div><div style="font-size:13px;color:#7b8794;margin-top:2px">on-time delivery record</div></div>
+        <div style="width:1px;background:#e3e8ed"></div>
+        <div><div style="font-size:26px;font-weight:800;letter-spacing:-.02em">20 yrs</div><div style="font-size:13px;color:#7b8794;margin-top:2px">senior design craft</div></div>
+      </div>
+    </div>
+    <!-- hero visual: real delivered deck -->
+    <div style="position:relative;height:420px;animation:heroIn .8s cubic-bezier(.2,.7,.3,1) .2s both">
+      <div style="position:absolute;inset:0;border-radius:16px;overflow:hidden;border:1px solid #dfe5ec;box-shadow:0 28px 64px -30px rgba(13,22,33,.45)">
+        <img src="assets/deck-laptop.jpeg" alt="A finished DeckHaus pitch deck on a laptop" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.3,1)" style-hover="transform:scale(1.04)">
+      </div>
+      <div style="position:absolute;bottom:-18px;left:-18px;background:#fff;border:1px solid #e3e8ed;border-radius:13px;padding:14px 18px;box-shadow:0 16px 36px -18px rgba(13,22,33,.4);animation:floaty 5s ease-in-out infinite">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:#7b8794;letter-spacing:.06em;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#2fa36b;animation:blink 2s ease-in-out infinite"></span>DELIVERED</div>
+        <div style="font-size:16px;font-weight:800;letter-spacing:-.02em;margin-top:2px">On time · on budget</div>
+      </div>
+      <div style="position:absolute;top:-14px;right:-10px;background:#0d1621;color:#fff;border-radius:11px;padding:10px 15px;box-shadow:0 14px 30px -14px rgba(13,22,33,.55);animation:floaty 6s ease-in-out 1.2s infinite">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:#7f97b3;letter-spacing:.06em">NEXT SLOT</div>
+        <div style="font-size:14px;font-weight:800;letter-spacing:-.01em;margin-top:1px">48h — available</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<section style="border-top:1px solid #e3e8ed;border-bottom:1px solid #e3e8ed;background:#f4f6f9">
+  <div data-pad data-grid5 style="max-width:1220px;margin:0 auto;padding:34px 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:34px">
+    <sc-for list="{{ trust }}" as="t" hint-placeholder-count="4">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <span style="flex:none;width:34px;height:34px;border:1.5px solid var(--accent,#1c3a5e);border-radius:9px;display:inline-flex;align-items:center;justify-content:center;color:var(--accent,#1c3a5e);font-family:'Space Mono',monospace;font-size:13px;font-weight:700;animation:iconPop .5s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% entry 60%">{{ t.mark }}</span>
+        <div>
+          <div style="font-size:14.5px;font-weight:700;letter-spacing:-.01em;line-height:1.25">{{ t.title }}</div>
+          <div style="font-size:13px;color:#7b8794;margin-top:3px;line-height:1.4">{{ t.sub }}</div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section id="products" style="scroll-margin-top:86px">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:96px 40px 20px">
+    <div style="animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 40%">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--accent,#1c3a5e);margin-bottom:14px">01 — WHAT WE MAKE</div>
+      <h2 style="font-size:40px;font-weight:800;letter-spacing:-.03em;margin:0 0 14px;max-width:640px;line-height:1.08">Five products. Every one priced before you order.</h2>
+      <p style="font-size:17px;color:#4a5763;max-width:560px;margin:0 0 44px;line-height:1.5">No quotes by email, no surprise invoices. Pick the format, configure the scope, see the number.</p>
+    </div>
+    <div data-grid3 style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="5">
+        <div style="border:1px solid #e3e8ed;border-radius:16px;padding:28px 26px 24px;background:#fff;display:flex;flex-direction:column;transition:border-color .25s,box-shadow .25s,transform .25s;animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 42%" style-hover="border-color:var(--accent,#1c3a5e);box-shadow:0 22px 48px -28px rgba(13,22,33,.5);transform:translateY(-5px)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+            <span style="width:40px;height:40px;border-radius:11px;background:color-mix(in srgb,var(--accent,#1c3a5e) 9%,#fff);color:var(--accent,#1c3a5e);display:inline-flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-weight:700;font-size:15px;animation:iconPop .5s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% entry 55%">{{ p.no }}</span>
+            <span style="font-family:'Space Mono',monospace;font-size:12px;color:#7b8794">{{ p.priceLabel }}</span>
+          </div>
+          <h3 style="font-size:20px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;line-height:1.2">{{ p.name }}</h3>
+          <p style="font-size:14px;color:#7b8794;line-height:1.5;margin:0 0 20px;flex:1">{{ p.blurb }}</p>
+          <button onClick="{{ p.configure }}" style="align-self:flex-start;border:none;background:none;color:var(--accent,#1c3a5e);font-weight:600;font-size:14.5px;cursor:pointer;padding:0" style-hover="color:color-mix(in srgb,var(--accent,#1c3a5e) 78%,#000)">Configure this →</button>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIER COMPARISON ============ -->
+<section id="pricing" style="scroll-margin-top:86px">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:92px 40px">
+    <div style="animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 40%">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--accent,#1c3a5e);margin-bottom:14px">02 — DESIGN TIERS</div>
+      <h2 style="font-size:40px;font-weight:800;letter-spacing:-.03em;margin:0 0 14px;max-width:640px;line-height:1.08">Three tiers. Same rigor, different depth.</h2>
+      <p style="font-size:17px;color:#4a5763;max-width:560px;margin:0 0 44px;line-height:1.5">Every tier ships editable source files, a documented review, and a fixed date.</p>
+    </div>
+    <div data-tiers style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start">
+      <sc-for list="{{ tiers }}" as="tr" hint-placeholder-count="3">
+        <div style="border:{{ tr.border }};border-radius:18px;overflow:hidden;background:{{ tr.bg }};position:relative">
+          <div style="padding:28px 26px 22px;border-bottom:1px solid {{ tr.line }}">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;color:{{ tr.kicker }}">{{ tr.tag }}</span>
+              <sc-if value="{{ tr.popular }}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px;font-weight:700;letter-spacing:.04em;background:var(--accent,#1c3a5e);color:#fff;padding:3px 9px;border-radius:20px">MOST POPULAR</span></sc-if>
+            </div>
+            <div style="font-size:24px;font-weight:800;letter-spacing:-.02em;color:{{ tr.nameColor }}">{{ tr.name }}</div>
+            <div style="display:flex;align-items:baseline;gap:6px;margin-top:14px">
+              <span style="font-size:34px;font-weight:800;letter-spacing:-.03em;color:{{ tr.nameColor }}">{{ tr.price }}</span>
+              <span style="font-size:14px;color:{{ tr.subColor }}">/ slide</span>
+            </div>
+            <div style="font-size:13px;color:{{ tr.subColor }};margin-top:4px">{{ tr.priceNote }}</div>
+          </div>
+          <div style="padding:20px 26px 26px">
+            <sc-for list="{{ tr.rows }}" as="r" hint-placeholder-count="6">
+              <div style="display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid {{ tr.line }};font-size:13.5px">
+                <span style="color:{{ tr.subColor }}">{{ r.k }}</span>
+                <span style="font-weight:600;text-align:right;color:{{ tr.nameColor }}">{{ r.v }}</span>
+              </div>
+            </sc-for>
+            <button onClick="{{ tr.select }}" style="width:100%;margin-top:20px;border:{{ tr.btnBorder }};background:{{ tr.btnBg }};color:{{ tr.btnFg }};font-weight:600;font-size:14.5px;padding:13px;border-radius:10px;cursor:pointer">Configure {{ tr.name }}</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process" style="scroll-margin-top:86px;background:#0d1621;color:#fff">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:92px 40px">
+    <div style="animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 40%">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:#7f97b3;margin-bottom:14px">03 — HOW IT WORKS</div>
+      <h2 style="font-size:40px;font-weight:800;letter-spacing:-.03em;margin:0 0 14px;max-width:680px;line-height:1.08">Six steps. No email chaos.</h2>
+      <p style="font-size:17px;color:#9fb0c4;max-width:600px;margin:0 0 52px;line-height:1.5">Every comment and every approval is documented in one place — from brief to final files.</p>
+    </div>
+    <div data-process style="display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="6">
+        <div style="padding:0 18px 0 0;position:relative">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+            <span style="flex:none;width:36px;height:36px;border-radius:50%;background:{{ s.circleBg }};border:1.5px solid {{ s.circleBorder }};color:{{ s.circleFg }};display:inline-flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-weight:700;font-size:14px">{{ s.n }}</span>
+            <div style="flex:1;height:1px;background:#26384c"></div>
+          </div>
+          <div style="font-size:15.5px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px;line-height:1.25">{{ s.title }}</div>
+          <div style="font-size:13px;color:#9fb0c4;line-height:1.45">{{ s.body }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIFFERENTIATORS ============ -->
+<section id="differentiators" style="scroll-margin-top:86px;background:#f4f6f9;border-top:1px solid #e3e8ed;border-bottom:1px solid #e3e8ed">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:92px 40px">
+    <div data-2col style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+      <div style="animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 40%">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--accent,#1c3a5e);margin-bottom:14px">04 — WHY DECKHAUS</div>
+        <h2 style="font-size:40px;font-weight:800;letter-spacing:-.03em;margin:0 0 20px;line-height:1.08">Senior craft,<br>AI speed.</h2>
+        <p style="font-size:17px;color:#4a5763;line-height:1.6;margin:0 0 26px">Twenty years of Adobe mastery, combined with a proprietary AI image and video pipeline. We produce custom hero visuals no template shop can — and we do it in 48–72 hours when you need it.</p>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ diffs }}" as="d" hint-placeholder-count="3">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="flex:none;width:8px;height:8px;background:var(--accent,#1c3a5e);border-radius:2px;margin-top:7px;transform:rotate(45deg)"></span>
+              <div><span style="font-weight:700;font-size:15px">{{ d.h }}</span><span style="font-size:15px;color:#4a5763"> — {{ d.b }}</span></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:30px;padding-top:22px;border-top:1px solid #e3e8ed">
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7b8794;margin-bottom:12px">INDUSTRIES WE SERVE</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ industries }}" as="i" hint-placeholder-count="4">
+              <span style="font-size:13px;font-weight:600;color:#0d1621;border:1px solid #d4dbe2;background:#fff;border-radius:20px;padding:6px 14px">{{ i }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;border:1px solid #dfe5ec;animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 40%">
+        <img src="assets/designer-craft.jpeg" alt="Senior designer at work, accelerated by an AI pipeline" style="width:100%;height:100%;object-fit:cover;display:block">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 16px 14px;background:linear-gradient(transparent,rgba(8,14,20,.82));color:#fff;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.04em;display:flex;justify-content:space-between"><span>proprietary AI pipeline</span><span>no stock, no templates</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI PRODUCTION STUDIO ============ -->
+<section id="ai-studio" style="scroll-margin-top:86px;background:#0d1621;color:#fff;border-top:1px solid #1a2735">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:96px 40px">
+    <div style="max-width:760px;animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 40%">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:#7f97b3;margin-bottom:14px">05 — AI PRODUCTION STUDIO</div>
+      <h2 style="font-size:42px;font-weight:800;letter-spacing:-.03em;margin:0 0 18px;line-height:1.06">We don't search stock photos.<br>We direct them.</h2>
+      <p style="font-size:18px;color:#9fb0c4;line-height:1.55;margin:0 0 52px">An in-house AI image and video pipeline, refined over hundreds of productions for automotive, medtech and food brands. Every visual in your deck is generated, art-directed and retouched specifically for your story — impossible to find in any stock library.</p>
+    </div>
+
+    <div data-grid3 style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <sc-for list="{{ aiCards }}" as="c" hint-placeholder-count="3">
+        <div style="background:#141f2c;border:1px solid #26384c;border-radius:16px;padding:28px 26px;display:flex;flex-direction:column;animation:rvl both linear;animation-timeline:view();animation-range:entry 0% entry 46%;transition:transform .25s,border-color .25s" style-hover="transform:translateY(-5px);border-color:#3d5a75">
+          <div style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--accent,#1c3a5e);background:color-mix(in srgb,var(--accent,#1c3a5e) 22%,#0d1621);border:1px solid #2b4257;align-self:flex-start;padding:5px 11px;border-radius:20px;margin-bottom:18px;color:#9fc4ea">{{ c.tag }}</div>
+          <h3 style="font-size:19px;font-weight:700;letter-spacing:-.02em;margin:0 0 10px;line-height:1.2;color:#fff">{{ c.title }}</h3>
+          <p style="font-size:14px;color:#9fb0c4;line-height:1.55;margin:0">{{ c.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- showcase gallery -->
+    <div style="margin-top:24px">
+      <div data-grid3 style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+        <div style="position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid #26384c">
+          <img src="assets/slide-automotive.jpeg" alt="Automotive portfolio piece" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.3,1)" style-hover="transform:scale(1.05)">
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 16px 12px;background:linear-gradient(transparent,rgba(8,14,20,.85));font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#fff">AUTOMOTIVE</div>
+        </div>
+        <div style="position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid #26384c">
+          <img src="assets/slide-medtech.jpeg" alt="Medtech portfolio piece" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.3,1)" style-hover="transform:scale(1.05)">
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 16px 12px;background:linear-gradient(transparent,rgba(8,14,20,.85));font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#fff">MEDTECH</div>
+        </div>
+        <div style="position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid #26384c;background:repeating-linear-gradient(135deg,#141f2c 0 14px,#182635 14px 28px);display:flex;align-items:center;justify-content:center">
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;color:#7f97b3;text-align:center;line-height:1.7">[ PORTFOLIO PIECE ]<br>drop your image</div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 16px 12px;background:linear-gradient(transparent,rgba(8,14,20,.85));font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#fff">FOOD &amp; EVENTS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- production stack -->
+    <div style="margin-top:44px;padding-top:30px;border-top:1px solid #26384c;display:flex;flex-wrap:wrap;align-items:center;gap:14px">
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7f97b3">OUR PRODUCTION STACK:</span>
+      <sc-for list="{{ stack }}" as="s" hint-placeholder-count="7">
+        <span style="font-size:13px;font-weight:600;color:#c4d0dd;border:1px solid #26384c;border-radius:8px;padding:6px 13px">{{ s }}</span>
+      </sc-for>
+    </div>
+
+    <!-- closing CTA -->
+    <div style="margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+      <span style="font-size:16px;color:#9fb0c4">Need visuals only? We also produce AI imagery and video as a standalone service.</span>
+      <a href="mailto:hello@deckhaus.studio?subject=AI%20production%20enquiry" style="font-size:16px;font-weight:700;color:#9fc4ea">Ask about AI production →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ADD-ONS STRIP (marquee) ============ -->
+<section style="scroll-margin-top:86px;border-bottom:1px solid #e3e8ed">
+  <div style="max-width:100%;overflow:hidden;padding:34px 0;position:relative">
+    <div style="position:absolute;top:0;bottom:0;left:0;width:120px;background:linear-gradient(90deg,#fff,transparent);z-index:2;pointer-events:none"></div>
+    <div style="position:absolute;top:0;bottom:0;right:0;width:120px;background:linear-gradient(-90deg,#fff,transparent);z-index:2;pointer-events:none"></div>
+    <div style="display:flex;gap:44px;width:max-content;animation:marquee 26s linear infinite">
+      <sc-for list="{{ addonsLoop }}" as="a" hint-placeholder-count="10">
+        <div style="display:flex;align-items:center;gap:11px;font-size:15px;font-weight:600;white-space:nowrap;color:#0d1621">
+          <span style="width:6px;height:6px;background:var(--accent,#1c3a5e);transform:rotate(45deg)"></span>{{ a }}
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE CALCULATOR ============ -->
+<section id="calculator" style="scroll-margin-top:86px;background:#0d1621;color:#fff">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:92px 40px">
+    <div style="text-align:center;max-width:620px;margin:0 auto 48px">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:#7f97b3;margin-bottom:14px">06 — INSTANT QUOTE</div>
+      <h2 style="font-size:42px;font-weight:800;letter-spacing:-.03em;margin:0 0 12px;line-height:1.06">Configure it. See the price.<br>Book the date.</h2>
+      <p style="font-size:17px;color:#9fb0c4;margin:0;line-height:1.5">Live estimate — no email required to see your number.</p>
+    </div>
+    <div data-calc style="display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:start;max-width:1000px;margin:0 auto">
+      <!-- controls -->
+      <div style="background:#141f2c;border:1px solid #26384c;border-radius:18px;padding:30px 30px 34px">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7f97b3;margin-bottom:12px">PRODUCT TYPE</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px">
+          <sc-for list="{{ productChips }}" as="c" hint-placeholder-count="5">
+            <button onClick="{{ c.pick }}" style="border:{{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:13px;font-weight:600;padding:8px 14px;border-radius:9px;cursor:pointer">{{ c.name }}</button>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7f97b3">NUMBER OF {{ calcUnitPlural }}</span>
+          <span style="font-size:20px;font-weight:800;color:#fff">{{ calcSlides }}</span>
+        </div>
+        <input type="range" min="10" max="35" step="1" value="{{ calcSlides }}" onInput="{{ setSlides }}" style="width:100%;accent-color:var(--accent,#1c3a5e);margin-bottom:6px;cursor:pointer">
+        <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:#5f7189;margin-bottom:28px"><span>10</span><span>35</span></div>
+
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7f97b3;margin-bottom:12px">DESIGN TIER</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:28px">
+          <sc-for list="{{ tierChips }}" as="c" hint-placeholder-count="3">
+            <button onClick="{{ c.pick }}" style="border:{{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:13px;font-weight:700;padding:11px 6px;border-radius:10px;cursor:pointer;text-align:center">{{ c.name }}<div style="font-family:'Space Mono',monospace;font-size:10px;font-weight:400;color:{{ c.subFg }};margin-top:3px">{{ c.per }}</div></button>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7f97b3">REVISION CYCLES</span>
+          <span style="font-size:13px;color:#9fb0c4">{{ revIncludedNote }}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <button onClick="{{ decRev }}" style="width:40px;height:40px;border:1px solid #26384c;background:#0d1621;color:#fff;border-radius:10px;font-size:20px;cursor:pointer">−</button>
+          <span style="font-size:22px;font-weight:800;min-width:24px;text-align:center">{{ calcRevisions }}</span>
+          <button onClick="{{ incRev }}" style="width:40px;height:40px;border:1px solid #26384c;background:#0d1621;color:#fff;border-radius:10px;font-size:20px;cursor:pointer">+</button>
+        </div>
+      </div>
+
+      <!-- summary -->
+      <div style="background:linear-gradient(180deg,#182534,#141f2c);border:1px solid #2b4257;border-radius:18px;padding:30px;position:sticky;top:88px">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7f97b3;margin-bottom:6px">ESTIMATED TOTAL</div>
+        <div style="font-size:48px;font-weight:800;letter-spacing:-.03em;line-height:1;color:#fff">{{ calcPrice }}</div>
+        <div style="font-size:13.5px;color:#9fb0c4;margin-top:8px">{{ calcPerUnit }} · {{ calcProdName }}</div>
+
+        <div style="height:1px;background:#26384c;margin:22px 0"></div>
+
+        <div style="display:flex;justify-content:space-between;font-size:13.5px;padding:5px 0;color:#c4d0dd"><span>Scope</span><span style="font-weight:600;color:#fff">{{ calcSlides }} {{ calcUnitPlural }}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13.5px;padding:5px 0;color:#c4d0dd"><span>Tier</span><span style="font-weight:600;color:#fff">{{ calcTierName }}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13.5px;padding:5px 0;color:#c4d0dd"><span>Revision cycles</span><span style="font-weight:600;color:#fff">{{ calcRevisions }}</span></div>
+
+        <div style="background:#0d1621;border-radius:12px;padding:16px 18px;margin-top:20px">
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7f97b3">ESTIMATED DELIVERY</div>
+          <div style="font-size:19px;font-weight:800;margin-top:4px;color:#fff">{{ calcDelivery }}</div>
+          <div style="font-size:12.5px;color:#9fb0c4;margin-top:2px">≈ {{ calcDays }} business days · {{ calcSpeed }}</div>
+        </div>
+
+        <button onClick="{{ openModal }}" style="width:100%;margin-top:20px;border:none;background:var(--accent,#1c3a5e);color:#fff;font-weight:700;font-size:16px;padding:15px;border-radius:12px;cursor:pointer" style-hover="background:color-mix(in srgb,var(--accent,#1c3a5e) 84%,#fff)">Request this quote →</button>
+        <div style="text-align:center;font-size:12px;color:#5f7189;margin-top:10px">50% down · 50% on approval · SEPA / EUR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" style="scroll-margin-top:86px;background:#f4f6f9;border-top:1px solid #e3e8ed">
+  <div data-pad style="max-width:820px;margin:0 auto;padding:92px 40px">
+    <div style="text-align:center;margin-bottom:44px">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--accent,#1c3a5e);margin-bottom:14px">07 — FAQ</div>
+      <h2 style="font-size:40px;font-weight:800;letter-spacing:-.03em;margin:0;line-height:1.08">Answered before you ask.</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div style="background:#fff;border:1px solid #e3e8ed;border-radius:12px;overflow:hidden">
+          <button onClick="{{ f.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;background:none;border:none;padding:20px 22px;cursor:pointer">
+            <span style="font-size:16.5px;font-weight:700;letter-spacing:-.01em;color:#0d1621">{{ f.q }}</span>
+            <span style="flex:none;font-size:22px;color:var(--accent,#1c3a5e);transform:{{ f.rot }};transition:transform .2s">+</span>
+          </button>
+          <div style="max-height:{{ f.mh }};overflow:hidden;transition:max-height .28s ease">
+            <p style="font-size:15px;line-height:1.6;color:#4a5763;margin:0;padding:0 22px 22px">{{ f.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section style="background:#0d1621;color:#fff;text-align:center">
+  <div data-pad style="max-width:800px;margin:0 auto;padding:88px 40px">
+    <h2 style="font-size:44px;font-weight:800;letter-spacing:-.03em;margin:0 0 18px;line-height:1.05">Your next deck has a price<br>and a date. Right now.</h2>
+    <p style="font-size:18px;color:#9fb0c4;margin:0 0 30px">Configure a quote in under two minutes.</p>
+    <button onClick="{{ goCalc }}" style="border:none;background:var(--accent,#1c3a5e);color:#fff;font-weight:700;font-size:17px;padding:16px 32px;border-radius:12px;cursor:pointer" style-hover="background:color-mix(in srgb,var(--accent,#1c3a5e) 84%,#fff)">Get an instant quote →</button>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#0a1119;color:#8595a6;border-top:1px solid #1a2735">
+  <div data-pad style="max-width:1220px;margin:0 auto;padding:56px 40px 40px">
+    <div data-2col style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="width:26px;height:26px;border:2px solid #fff;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px">D</span>
+          <span style="font-weight:700;font-size:18px;color:#fff;letter-spacing:-.03em">DeckHaus</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;max-width:280px;margin:0 0 14px">Productized presentation design. Fixed price per slide, fixed delivery dates, documented reviews.</p>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.04em;color:#5f7189">QUITO, ECUADOR · LATITUDE 0°</div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;color:#fff;margin-bottom:16px;font-family:'Space Mono',monospace">CONTACT</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <a href="mailto:hello@deckhaus.studio" style="color:#8595a6">hello@deckhaus.studio</a>
+          <a href="https://wa.me/593000000000" style="color:#8595a6">WhatsApp →</a>
+          <a href="#" style="color:#8595a6">LinkedIn</a>
+          <a href="#" style="color:#8595a6">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;color:#fff;margin-bottom:16px;font-family:'Space Mono',monospace">SITE</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <a href="#products" style="color:#8595a6">Products</a>
+          <a href="#pricing" style="color:#8595a6">Pricing</a>
+          <a href="#process" style="color:#8595a6">Process</a>
+          <a href="#calculator" style="color:#8595a6">Get a quote</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-top:44px;padding-top:24px;border-top:1px solid #1a2735;font-size:12.5px">
+      <span>© 2026 DeckHaus · [Owner Name] · RUC 0000000000001</span>
+      <span style="display:flex;gap:18px"><a href="#" style="color:#8595a6">Privacy</a><a href="#" style="color:#8595a6">Terms</a><a href="#" style="color:#8595a6">NDA on request</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ QUOTE MODAL ============ -->
+<sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:100;background:rgba(10,17,25,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;animation:fadein .18s ease">
+    <div onClick="{{ stop }}" style="background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow:auto;box-shadow:0 40px 100px -30px rgba(10,17,25,.6)">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:34px 34px 30px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <h3 style="font-size:24px;font-weight:800;letter-spacing:-.02em;margin:0">Request your quote</h3>
+            <button onClick="{{ closeModal }}" style="border:none;background:#f4f6f9;width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:18px;color:#4a5763">✕</button>
+          </div>
+          <div style="background:#f4f6f9;border:1px solid #e3e8ed;border-radius:12px;padding:14px 16px;margin:14px 0 24px;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:13px;color:#7b8794">{{ calcProdName }} · {{ calcTierName }}</div><div style="font-size:13px;color:#7b8794">{{ calcSlides }} {{ calcUnitPlural }} · {{ calcRevisions }} revisions</div></div>
+            <div style="text-align:right"><div style="font-size:22px;font-weight:800;letter-spacing:-.02em">{{ calcPrice }}</div><div style="font-size:12px;color:#7b8794">by {{ calcDelivery }}</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <label style="font-size:13px;font-weight:600;color:#4a5763">Name<input placeholder="Your name" style="width:100%;margin-top:6px;border:1px solid #d4dbe2;border-radius:9px;padding:11px 12px;font-size:14px;color:#0d1621"></label>
+              <label style="font-size:13px;font-weight:600;color:#4a5763">Company<input placeholder="Company" style="width:100%;margin-top:6px;border:1px solid #d4dbe2;border-radius:9px;padding:11px 12px;font-size:14px;color:#0d1621"></label>
+            </div>
+            <label style="font-size:13px;font-weight:600;color:#4a5763">Work email<input placeholder="you@company.com" type="email" style="width:100%;margin-top:6px;border:1px solid #d4dbe2;border-radius:9px;padding:11px 12px;font-size:14px;color:#0d1621"></label>
+            <label style="font-size:13px;font-weight:600;color:#4a5763">Target deadline<input type="date" style="width:100%;margin-top:6px;border:1px solid #d4dbe2;border-radius:9px;padding:11px 12px;font-size:14px;color:#0d1621"></label>
+            <label style="font-size:13px;font-weight:600;color:#4a5763">Notes / files<textarea placeholder="Anything we should know? Share a link to source files." rows="3" style="width:100%;margin-top:6px;border:1px solid #d4dbe2;border-radius:9px;padding:11px 12px;font-size:14px;color:#0d1621;resize:vertical"></textarea></label>
+            <div style="font-size:12px;color:#7b8794;display:flex;align-items:center;gap:8px">📎 Have source files? You'll get an upload link once we reply — NDA available on request.</div>
+            <button onClick="{{ sendForm }}" style="border:none;background:var(--accent,#1c3a5e);color:#fff;font-weight:700;font-size:16px;padding:14px;border-radius:11px;cursor:pointer">Send request</button>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:52px 40px;text-align:center">
+          <div style="width:64px;height:64px;border-radius:50%;background:color-mix(in srgb,var(--accent,#1c3a5e) 12%,#fff);color:var(--accent,#1c3a5e);display:inline-flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:20px">✓</div>
+          <h3 style="font-size:24px;font-weight:800;letter-spacing:-.02em;margin:0 0 10px">Request received</h3>
+          <p style="font-size:15.5px;color:#4a5763;line-height:1.5;margin:0 0 24px;max-width:360px;margin-left:auto;margin-right:auto">Your dedicated contact will confirm scope, date and the {{ calcPrice }} estimate within one business day.</p>
+          <button onClick="{{ closeModal }}" style="border:1px solid #d4dbe2;background:#fff;color:#0d1621;font-weight:600;font-size:15px;padding:12px 26px;border-radius:11px;cursor:pointer">Close</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1220,&quot;height&quot;:900},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1c3a5e&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#1c3a5e&quot;,&quot;#1a4d3a&quot;,&quot;#7a2e2e&quot;,&quot;#2d2a4a&quot;,&quot;#c8622a&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;popularTier&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;advanced&quot;,&quot;options&quot;:[&quot;essential&quot;,&quot;advanced&quot;,&quot;signature&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pricing&quot;}}">
+class Component extends DCLogic {
+  state = {
+    product: 'pitch', slides: 20, tier: 'advanced', revisions: 2,
+    openFaq: 0, lang: 'EN', modal: false, sent: false,
+  };
+  PRODUCTS = [
+    { id: 'pitch', no: '01', name: 'Pitch Decks', unit: 'slide', base: 25, priceLabel: 'from €25 / slide', blurb: 'Investor and fundraising decks engineered to hold attention and close the round.' },
+    { id: 'sales', no: '02', name: 'Company & Sales Presentations', unit: 'slide', base: 25, priceLabel: 'from €25 / slide', blurb: 'On-brand sales and corporate decks your whole team can present with confidence.' },
+    { id: 'master', no: '03', name: 'Master Slides / Templates', unit: 'slide', base: 39, priceLabel: 'from €39 / slide', blurb: 'A locked master system in PowerPoint or Keynote — every future deck, on-brand.' },
+    { id: 'info', no: '04', name: 'Infographics', unit: 'piece', base: 149, priceLabel: 'from €149 / piece', blurb: 'Dense data and processes turned into a single, unmistakably clear visual.' },
+    { id: 'onepager', no: '05', name: 'One-Pagers & Documents', unit: 'page', base: 79, priceLabel: 'from €79 / page', blurb: 'Sales one-pagers, reports and leave-behinds designed to be read and remembered.' },
+  ];
+
+  FACTOR = { essential: 1, advanced: 1.4, signature: 1.9 };
+  INCLUDED = { essential: 1, advanced: 2, signature: 3 };
+  TIERNAME = { essential: 'Essential', advanced: 'Advanced', signature: 'Signature' };
+  SPEED = { essential: 'standard queue', advanced: 'faster queue', signature: 'priority delivery' };
+
+  addBusinessDays(days) {
+    const d = new Date(2026, 6, 6); let added = 0;
+    while (added < days) { d.setDate(d.getDate() + 1); const wd = d.getDay(); if (wd !== 0 && wd !== 6) added++; }
+    return d;
+  }
+  fmt(n) { return '€' + Math.round(n).toLocaleString('de-DE'); }
+
+  renderVals() {
+    const accent = this.props.accentColor || '#1c3a5e';
+    const popular = this.props.popularTier || 'advanced';
+    const prod = this.PRODUCTS.find(p => p.id === this.state.product) || this.PRODUCTS[0];
+    const factor = this.FACTOR[this.state.tier];
+    const perUnit = prod.base * factor;
+    const extraRev = Math.max(0, this.state.revisions - this.INCLUDED[this.state.tier]);
+    const price = this.state.slides * perUnit + extraRev * 90;
+
+    const qtyDays = Math.ceil(this.state.slides / 10);
+    let days = 3 + qtyDays * 2 + (this.state.tier === 'signature' ? -2 : this.state.tier === 'essential' ? 1 : 0) + this.state.revisions;
+    days = Math.max(3, days);
+    const deliv = this.addBusinessDays(days);
+    const delivStr = deliv.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
+
+    const unitPlural = prod.unit === 'slide' ? 'slides' : prod.unit === 'page' ? 'pages' : 'pieces';
+
+    const productChips = this.PRODUCTS.map(p => {
+      const on = p.id === this.state.product;
+      return { name: p.name.replace(' Presentations', '').replace('Company & Sales', 'Sales'), pick: () => this.setState({ product: p.id }),
+        border: on ? '1px solid ' + accent : '1px solid #26384c', bg: on ? accent : '#0d1621', fg: on ? '#fff' : '#c4d0dd' };
+    });
+
+    const tierChips = ['essential', 'advanced', 'signature'].map(t => {
+      const on = t === this.state.tier;
+      return { name: this.TIERNAME[t], per: this.fmt(prod.base * this.FACTOR[t]) + '/' + prod.unit, pick: () => this.setState({ tier: t }),
+        border: on ? '1px solid ' + accent : '1px solid #26384c', bg: on ? accent : '#0d1621', fg: on ? '#fff' : '#c4d0dd', subFg: on ? 'rgba(255,255,255,.8)' : '#5f7189' };
+    });
+
+    // tier table
+    const mkTier = (t, price) => {
+      const isPop = t === popular;
+      return {
+        tag: t.toUpperCase(), name: this.TIERNAME[t], price: price, popular: isPop,
+        priceNote: t === 'essential' ? 'straightforward, on-brand' : t === 'advanced' ? 'the studio standard' : 'flagship craft + AI imagery',
+        bg: isPop ? '#0d1621' : '#fff',
+        border: isPop ? '1px solid #0d1621' : '1px solid #e3e8ed',
+        line: isPop ? '#26384c' : '#eef1f4',
+        nameColor: isPop ? '#fff' : '#0d1621',
+        subColor: isPop ? '#9fb0c4' : '#7b8794',
+        kicker: isPop ? '#7f97b3' : accent,
+        btnBg: isPop ? accent : '#fff', btnFg: isPop ? '#fff' : accent,
+        btnBorder: isPop ? 'none' : '1px solid ' + accent,
+        select: () => this.setState({ tier: t }, () => this.goCalc()),
+        rows: [
+          { k: 'Who designs it', v: t === 'essential' ? 'Professional designer' : t === 'advanced' ? 'Senior designer' : 'Art director + senior' },
+          { k: 'Design proposals', v: t === 'essential' ? '1' : t === 'advanced' ? '2' : '3' },
+          { k: 'Revision cycles', v: t === 'essential' ? '1' : t === 'advanced' ? '2' : '3' },
+          { k: 'Custom AI hero imagery', v: t === 'essential' ? '—' : t === 'advanced' ? 'Optional' : 'Included' },
+          { k: 'Delivery speed', v: t === 'essential' ? 'Standard' : t === 'advanced' ? 'Faster' : 'Priority' },
+        ],
+      };
+    };
+    const tiers = [mkTier('essential', 'from €25'), mkTier('advanced', 'from €35'), mkTier('signature', 'from €48')];
+
+    const FAQ = [
+      { q: 'How does per-slide pricing work?', a: 'You pick a product and a design tier, then set the number of slides. The price per slide is fixed by tier, so your total is transparent before you order — no hourly billing, no surprise invoices.' },
+      { q: 'What formats do you deliver?', a: 'Fully editable PowerPoint and Keynote as standard, plus Google Slides and print-ready PDF on request. Master templates ship with a documented style guide.' },
+      { q: 'How do reviews work?', a: 'You review online and comment directly on every page, pixel-precise. Each comment and approval is documented in one place — no email chaos, no version confusion.' },
+      { q: 'Do you sign NDAs?', a: 'Yes. Full confidentiality is standard, and we counter-sign your NDA on request before any material is shared. Source files and drafts stay private to your project.' },
+      { q: 'How do international payments and invoicing work?', a: 'We invoice in EUR via SEPA and accept USD. You receive compliant international invoices suitable for Switzerland, Germany, the US and LATAM. Standard terms are 50% down, 50% on approval.' },
+      { q: "What if I'm not satisfied?", a: "Your tier includes fixed revision cycles, and we always design one style sample first so the direction is approved before full production. If the sample isn't right, you don't proceed — and you can add extra revision cycles anytime." },
+    ];
+    const faqs = FAQ.map((f, i) => {
+      const open = this.state.openFaq === i;
+      return { q: f.q, a: f.a, toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })),
+        rot: open ? 'rotate(45deg)' : 'rotate(0deg)', mh: open ? '240px' : '0px' };
+    });
+
+    return {
+      accent,
+      // nav / lang
+      setEN: () => this.setState({ lang: 'EN' }), setES: () => this.setState({ lang: 'ES' }),
+      enBg: this.state.lang === 'EN' ? accent : '#fff', enFg: this.state.lang === 'EN' ? '#fff' : '#4a5763',
+      esBg: this.state.lang === 'ES' ? accent : '#fff', esFg: this.state.lang === 'ES' ? '#fff' : '#4a5763',
+      goCalc: () => this.goCalc(), goWork: () => { const e = document.getElementById('ai-studio'); if (e) window.scrollTo({ top: e.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' }); },
+
+      trust: [
+        { mark: '€', title: 'Transparent per-slide pricing', sub: 'Configured before you order.' },
+        { mark: '◷', title: 'Fixed delivery dates', sub: 'Committed up front, always met.' },
+        { mark: '◉', title: 'One dedicated contact', sub: 'No hand-offs, no chasing.' },
+        { mark: '◆', title: 'Full confidentiality', sub: 'NDA counter-signed on request.' },
+      ],
+      products: this.PRODUCTS.map(p => ({ ...p, configure: () => this.setState({ product: p.id }, () => this.goCalc()) })),
+      tiers,
+      steps: [
+        { n: '1', title: 'Brief form', body: 'A structured 10-minute brief captures goals, brand and content.' },
+        { n: '2', title: '50% down payment', body: 'A simple deposit confirms the slot and the delivery date.' },
+        { n: '3', title: 'Style sample', body: 'We design ONE slide first. You approve the direction before full production.' },
+        { n: '4', title: 'Full production', body: 'Senior designers build the deck, accelerated by our AI pipeline.' },
+        { n: '5', title: 'Online review', body: 'Comment directly on every page, pixel-precise. Every note is documented.' },
+        { n: '6', title: 'Approval → files', body: 'Approve, receive editable final files, and settle the remaining 50%.' },
+      ].map((s, i) => ({ ...s, circleBg: i === 2 ? accent : 'transparent', circleBorder: i === 2 ? accent : '#26384c', circleFg: '#fff' })),
+      aiCards: [
+        { tag: 'IMAGE GENERATION', title: 'Cinematic imagery on demand', body: 'Photorealistic hero visuals — products, vehicles, medical renders, food photography — with shot direction, lighting and composition controlled by a proprietary 20-rule cinematic prompt framework.' },
+        { tag: 'AI VIDEO', title: 'Motion for your message', body: 'Turn key slides into short AI video teasers: product reveals, animated data stories, event openers. Delivered in 1080p, ready for LinkedIn, investor emails or event screens.' },
+        { tag: 'CONSISTENCY PIPELINE', title: 'Brand-locked consistency', body: 'Characters, products and environments stay identical across every image and every slide — same face, same product, same world. No AI weirdness, no mismatched visuals.' },
+      ],
+      stack: ['Adobe Creative Suite', 'ComfyUI', 'Flux', 'Seedance', 'Kling', 'Veo', 'ElevenLabs'],
+      diffs: [
+        { h: 'Custom hero visuals', b: 'AI-generated cover imagery no template shop can produce.' },
+        { h: '48–72h turnaround', b: 'Rush production available when the date is immovable.' },
+        { h: 'AI video teasers', b: 'Turn your finished deck into a short motion teaser.' },
+      ],
+      industries: ['Automotive', 'Medtech', 'Food & Events', 'Startups', 'Manufacturing', 'Finance'],
+      addonsLoop: (() => { const a = ['Content structuring', 'Copywriting', 'Editable PowerPoint / Keynote', 'AI video teaser of your deck', 'Extra revision cycles']; return [...a, ...a]; })(),
+      faqs,
+
+      // calculator
+      calcSlides: this.state.slides, setSlides: (e) => this.setState({ slides: +e.target.value }),
+      calcRevisions: this.state.revisions,
+      incRev: () => this.setState(s => ({ revisions: Math.min(4, s.revisions + 1) })),
+      decRev: () => this.setState(s => ({ revisions: Math.max(1, s.revisions - 1) })),
+      revIncludedNote: this.INCLUDED[this.state.tier] + ' included in ' + this.TIERNAME[this.state.tier],
+      productChips, tierChips,
+      calcUnitPlural: unitPlural,
+      calcPrice: this.fmt(price), calcPerUnit: this.fmt(perUnit) + ' / ' + prod.unit,
+      calcProdName: prod.name, calcTierName: this.TIERNAME[this.state.tier],
+      calcDelivery: delivStr, calcDays: days, calcSpeed: this.SPEED[this.state.tier],
+
+      // modal
+      modal: this.state.modal, sent: this.state.sent, notSent: !this.state.sent,
+      openModal: () => this.setState({ modal: true, sent: false }),
+      closeModal: () => this.setState({ modal: false }),
+      sendForm: () => this.setState({ sent: true }),
+      stop: (e) => e.stopPropagation(),
+    };
+  }
+
+  goCalc() { const e = document.getElementById('calculator'); if (e) window.scrollTo({ top: e.getBoundingClientRect().top + window.scrollY - 66, behavior: 'smooth' }); }
+}
+</script>
+</body>
+</html>
