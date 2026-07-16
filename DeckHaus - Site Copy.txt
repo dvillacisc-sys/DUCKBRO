@@ -1,0 +1,252 @@
+DECKHAUS — WEBSITE COPY
+Presentation design, productized
+================================================
+
+
+NAVIGATION
+----------
+DeckHaus (logo)
+Products
+Pricing
+Process
+Work
+FAQ
+[EN / ES language switch]
+Button: Get an instant quote
+
+
+HERO
+----
+Badge: PRESENTATION DESIGN, PRODUCTIZED
+
+Headline:
+Pitch decks that close.
+Fixed price per slide.
+Fixed delivery date.
+
+Subline:
+Designed by senior designers, accelerated by an in-house AI production pipeline. You configure the price before you order — and we hit the date, every time.
+
+CTA primary: Get an instant quote →
+CTA secondary: See our AI production
+
+Stats row:
+48–72h — rush turnaround available
+100% — on-time delivery record
+20 yrs — senior design craft
+
+Floating tags on hero visual:
+DELIVERED — On time · on budget
+NEXT SLOT — 48h — available
+
+
+TRUST BAR (4 pillars)
+----------------------
+€  Transparent per-slide pricing — Configured before you order.
+◷  Fixed delivery dates — Committed up front, always met.
+◉  One dedicated contact — No hand-offs, no chasing.
+◆  Full confidentiality — NDA counter-signed on request.
+
+
+01 — WHAT WE MAKE (PRODUCTS)
+-----------------------------
+Headline: Five products. Every one priced before you order.
+Subline: No quotes by email, no surprise invoices. Pick the format, configure the scope, see the number.
+
+01. Pitch Decks — from €25 / slide
+Investor and fundraising decks engineered to hold attention and close the round.
+
+02. Company & Sales Presentations — from €25 / slide
+On-brand sales and corporate decks your whole team can present with confidence.
+
+03. Master Slides / Templates — from €39 / slide
+A locked master system in PowerPoint or Keynote — every future deck, on-brand.
+
+04. Infographics — from €149 / piece
+Dense data and processes turned into a single, unmistakably clear visual.
+
+05. One-Pagers & Documents — from €79 / page
+Sales one-pagers, reports and leave-behinds designed to be read and remembered.
+
+(Each card: "Configure this →")
+
+
+02 — DESIGN TIERS (PRICING)
+-----------------------------
+Headline: Three tiers. Same rigor, different depth.
+Subline: Every tier ships editable source files, a documented review, and a fixed date.
+
+ESSENTIAL — from €25 / slide
+"straightforward, on-brand"
+- Who designs it: Professional designer
+- Design proposals: 1
+- Revision cycles: 1
+- Custom AI hero imagery: —
+- Delivery speed: Standard
+
+ADVANCED — from €35 / slide  [MOST POPULAR]
+"the studio standard"
+- Who designs it: Senior designer
+- Design proposals: 2
+- Revision cycles: 2
+- Custom AI hero imagery: Optional
+- Delivery speed: Faster
+
+SIGNATURE — from €48 / slide
+"flagship craft + AI imagery"
+- Who designs it: Art director + senior
+- Design proposals: 3
+- Revision cycles: 3
+- Custom AI hero imagery: Included
+- Delivery speed: Priority
+
+
+03 — HOW IT WORKS (PROCESS)
+-----------------------------
+Headline: Six steps. No email chaos.
+Subline: Every comment and every approval is documented in one place — from brief to final files.
+
+1. Brief form — A structured 10-minute brief captures goals, brand and content.
+2. 50% down payment — A simple deposit confirms the slot and the delivery date.
+3. Style sample — We design ONE slide first. You approve the direction before full production.
+4. Full production — Senior designers build the deck, accelerated by our AI pipeline.
+5. Online review — Comment directly on every page, pixel-precise. Every note is documented.
+6. Approval → files — Approve, receive editable final files, and settle the remaining 50%.
+
+
+04 — WHY DECKHAUS (DIFFERENTIATORS)
+-------------------------------------
+Headline: Senior craft, AI speed.
+Body: Twenty years of Adobe mastery, combined with a proprietary AI image and video pipeline. We produce custom hero visuals no template shop can — and we do it in 48–72 hours when you need it.
+
+- Custom hero visuals — AI-generated cover imagery no template shop can produce.
+- 48–72h turnaround — Rush production available when the date is immovable.
+- AI video teasers — Turn your finished deck into a short motion teaser.
+
+Industries we serve: Automotive · Medtech · Food & Events · Startups · Manufacturing · Finance
+
+Image caption: proprietary AI pipeline · no stock, no templates
+
+
+05 — AI PRODUCTION STUDIO
+----------------------------
+Headline: We don't search stock photos. We direct them.
+Subline: An in-house AI image and video pipeline, refined over hundreds of productions for automotive, medtech and food brands. Every visual in your deck is generated, art-directed and retouched specifically for your story — impossible to find in any stock library.
+
+Card 1 — IMAGE GENERATION
+"Cinematic imagery on demand"
+Photorealistic hero visuals — products, vehicles, medical renders, food photography — with shot direction, lighting and composition controlled by a proprietary 20-rule cinematic prompt framework.
+
+Card 2 — AI VIDEO
+"Motion for your message"
+Turn key slides into short AI video teasers: product reveals, animated data stories, event openers. Delivered in 1080p, ready for LinkedIn, investor emails or event screens.
+
+Card 3 — CONSISTENCY PIPELINE
+"Brand-locked consistency"
+Characters, products and environments stay identical across every image and every slide — same face, same product, same world. No AI weirdness, no mismatched visuals.
+
+Showcase gallery labels: Automotive · Medtech · Food & Events (portfolio piece placeholder)
+
+Production stack: Adobe Creative Suite · ComfyUI · Flux · Seedance · Kling · Veo · ElevenLabs
+
+Closing line: Need visuals only? We also produce AI imagery and video as a standalone service. → Ask about AI production →
+
+
+ADD-ONS (marquee strip)
+-------------------------
+Content structuring
+Copywriting
+Editable PowerPoint / Keynote
+AI video teaser of your deck
+Extra revision cycles
+
+
+TESTIMONIALS
+------------
+★★★★★
+"They turned a chaotic 30-slide draft into a deck our board actually understood. The style sample step meant zero surprises."
+[A. Keller] — Head of IR · Switzerland
+
+★★★★★
+"Fixed price, fixed date, and they hit both. The custom cover imagery made us look far bigger than we are."
+[M. Braun] — VP Marketing · Germany
+
+★★★★★
+"The online review replaced a week of email threads. Every comment tracked, every decision documented."
+[R. Owens] — Founder · United States
+
+
+06 — INSTANT QUOTE (CALCULATOR)
+----------------------------------
+Headline: Configure it. See the price. Book the date.
+Subline: Live estimate — no email required to see your number.
+
+Controls: Product type · Number of slides (10–35 slider) · Design tier · Revision cycles
+Summary panel: Estimated total, scope, tier, revision cycles, estimated delivery date, business days, delivery speed
+CTA: Request this quote →
+Note: 50% down · 50% on approval · SEPA / EUR
+
+Quote modal:
+Title: Request your quote
+Fields: Name, Company, Work email, Target deadline, Notes / files
+Note: 📎 Have source files? You'll get an upload link once we reply — NDA available on request.
+Button: Send request
+
+Confirmation state:
+✓ Request received
+Your dedicated contact will confirm scope, date and the [price] estimate within one business day.
+
+
+07 — FAQ
+---------
+Q: How does per-slide pricing work?
+A: You pick a product and a design tier, then set the number of slides. The price per slide is fixed by tier, so your total is transparent before you order — no hourly billing, no surprise invoices.
+
+Q: What formats do you deliver?
+A: Fully editable PowerPoint and Keynote as standard, plus Google Slides and print-ready PDF on request. Master templates ship with a documented style guide.
+
+Q: How do reviews work?
+A: You review online and comment directly on every page, pixel-precise. Each comment and approval is documented in one place — no email chaos, no version confusion.
+
+Q: Do you sign NDAs?
+A: Yes. Full confidentiality is standard, and we counter-sign your NDA on request before any material is shared. Source files and drafts stay private to your project.
+
+Q: How do international payments and invoicing work?
+A: We invoice in EUR via SEPA and accept USD. You receive compliant international invoices suitable for Switzerland, Germany, the US and LATAM. Standard terms are 50% down, 50% on approval.
+
+Q: What if I'm not satisfied?
+A: Your tier includes fixed revision cycles, and we always design one style sample first so the direction is approved before full production. If the sample isn't right, you don't proceed — and you can add extra revision cycles anytime.
+
+
+FINAL CTA
+---------
+Headline: Your next deck has a price and a date. Right now.
+Subline: Configure a quote in under two minutes.
+Button: Get an instant quote →
+
+
+FOOTER
+------
+DeckHaus
+Productized presentation design. Fixed price per slide, fixed delivery dates, documented reviews.
+QUITO, ECUADOR · LATITUDE 0°
+
+Contact:
+hello@deckhaus.studio
+WhatsApp →
+LinkedIn
+Instagram
+
+Site:
+Products
+Pricing
+Process
+Get a quote
+
+Legal line: © 2026 DeckHaus · [Owner Name] · RUC 0000000000001
+Privacy · Terms · NDA on request
+
+
+================================================
+NOTE: Bracketed items — [Owner Name], RUC number, testimonial names/companies,
+WhatsApp number, LinkedIn/Instagram links — are placeholders pending your real details.
